@@ -1,8 +1,8 @@
-
-Camomile.aux
-
-Camomile.pdf
-
-Camomile.synctex.gz
-
-Camomile.log
+*.pdf
+*synctex*
+*.aux
+*.bbl
+*.log
+*.toc
+*.out
+*.blg

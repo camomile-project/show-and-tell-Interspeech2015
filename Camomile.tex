@@ -13,6 +13,9 @@
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath,bm}
 \usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{subfigure}
+
 
 \def\vec#1{\ensuremath{\bm{{#1}}}}
 \def\mat#1{\vec{#1}}
@@ -66,9 +69,31 @@ Reprendre cette présentation en plus détaillé dans une page github.io
 Resp : Johann
   
       \subsection{Web annotation front-end}
-(présenter le front-end web et pointer sur le lien github précis - y passer plus de temps 
+%(présenter le front-end web et pointer sur le lien github précis - y passer plus de temps 
 
-Resp : LIST
+\begin{figure}[h]
+ 	\includegraphics[width=0.5\textwidth]{camomile_ui.png}
+	\caption{Overview of the web front-end UI. \emph{1)} Video player displaying the shot/frame to annotate and the synchronized "context bar".\emph{2)} The "context bar" configuration and the video/frame labe and description.\emph{3)} The textfield where user have to type the annotation and the table displaying all available annotation of this shot/frame.}
+	\label{fig:front-end-UI}
+
+\end{figure}
+
+
+An overview of our visual tool is shown in figure~\ref{fig:front-end-UI}. Its components, described later, are implemented with SVG drawing primitives and html elements, that are linked to the data using the D3.js Javascript library \cite{d3js}. The angular.js framework \cite{angularjs} is also used to easily integrate a coordinated SVG context view. The latest version of our tool is available at \cite{url-front-end}.
+
+Though there are two main use cases, explain in Section 2.2.1 and 2.2.2, components are mainly the same for both: the shot or the frame to annotate is displayed in a html5 video player, its title is shown under the player, and when available, a description of it can be shown by clicking a description is available by clicking a button. In order to type the annotation and to point existing data, a textfield and a table are present under the player.\\
+
+Two use cases were defined by the LIG. For each one, a user will run through a list of task (i.e. giving the name and first name of a person). Everytime a task is completed, the UI will load the next one.
+
+\subsubsection{Annotate shot}
+In the first use case, a user have to be able to give the identity of a speaking person in a video part, and to navigate through it. He may also want to see some existing annotation upon the shot, as context.\\
+In order to display this context, we add wat we called the context bar, a video slider on which we add some layer representing the current annotation to do, and others close to it. A tooltip has also been added on each layer, giving as clue the a thumbnail of the annotation start and the name that may have been given.\\
+It is also possible to add seconds in front and after the shot to be able to look for already filled annotation with may be the same person speaking, which may help the user to complete his task.
+
+\subsubsection{Annotate head}
+The second one corresponds to give the identity of a on screen appearing person. This time, we thought there was no need to scroll through the video, so only the correspong frame is dislayed to the user. As many person can be on screen, we had to help user to figure out which one have to be identified. That's why we add a layer on the frame, on which we drew a red square surronding the head of the right person.\\
+
+%Resp : LIST
 
       \subsection{Active learning backend}
 (présenter l'approche LIG - retraining and adaptation - et pointer sur le lien github précis - y passer plus de temps 

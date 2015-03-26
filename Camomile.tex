@@ -46,13 +46,13 @@ This paper presents
   \noindent{\bf Index Terms}: to be added
 
   \section{Introduction}
-      \subsection{Demo presented}
-(Décrire en qq lignes la démo) 
+      \subsection{Context}
+Introduce the Camomile project in general terms. Then IMHO (Pierrick), owing to the space limitations, and for the sake of clarity, we should better restrict the presentation to one of the use cases - as far as the title goes, I guess we should relate to the active learning use case and the dry run experience. 
 
 Resp : all
 
- \subsection{Camomile project}
-reprendre des bouts de texte déjà écrits pour présenter le projet
+ \subsection{Demo Content}
+The demo shows the shot annotation interface. As for the document structure, I would go the other way: first talk about the use case, and then about the interactive tools to support it. Else we have to talk about a problem that has not been already introduced.
 
 Resp : all
 
@@ -71,27 +71,34 @@ Resp : Johann
       \subsection{Web annotation front-end}
 %(présenter le front-end web et pointer sur le lien github précis - y passer plus de temps 
 
+% Pierrick: from Mateusz' queue find a more illustrative example, i.e. with context annotation outside the current shot
 \begin{figure}[h]
  	\includegraphics[width=0.5\textwidth]{camomile_ui.png}
-	\caption{Overview of the web front-end UI. \emph{1)} Video player displaying the shot/frame to annotate and the synchronized "context bar".\emph{2)} The "context bar" configuration and the video/frame labe and description.\emph{3)} The textfield where user have to type the annotation and the table displaying all available annotation of this shot/frame.}
-	\label{fig:front-end-UI}
+	\caption{Overview of the web front-end UI. 1) Video player displaying the shot to annotate and the synchronized \emph{context bar}. 2) The \emph{context bar} configuration and the metadata field. The latter displays the video title, and reveals additional details when activated. 3) The textfield to type the annotation. Multiple annotations are supported, and summarized in a table.}
+	\label{fig:frontend}
 
 \end{figure}
 
+% Pierrick: during my trials for the demo video, I found that the annotation list was more annoying than anything else - I has to scroll everytime to do (next), whereas fitting in screen height would make things easier. Also, are multi-annotations to be supported?
 
-An overview of our visual tool is shown in figure~\ref{fig:front-end-UI}. Its components, described later, are implemented with SVG drawing primitives and html elements, that are linked to the data using the D3.js Javascript library \cite{d3js}. The angular.js framework \cite{angularjs} is also used to easily integrate a coordinated SVG context view. The latest version of our tool is available at \cite{url-front-end}.
+An overview of our visual tool is shown in Figure~\ref{fig:frontend}. It heavily uses the display features provided by HTML5 and D3.js \cite{d3js}. The angular.js framework \cite{angularjs} provides an efficient MVC framework to easily coordinate multiple views. The latest version of our tool is available at \cite{urlfrontend}.
 
-Though there are two main use cases, explain in Section 2.2.1 and 2.2.2, components are mainly the same for both: the shot or the frame to annotate is displayed in a html5 video player, its title is shown under the player, and when available, a description of it can be shown by clicking a description is available by clicking a button. In order to type the annotation and to point existing data, a textfield and a table are present under the player.\\
 
-Two use cases were defined by the LIG. For each one, a user will run through a list of task (i.e. giving the name and first name of a person). Everytime a task is completed, the UI will load the next one.
 
-\subsubsection{Annotate shot}
-In the first use case, a user have to be able to give the identity of a speaking person in a video part, and to navigate through it. He may also want to see some existing annotation upon the shot, as context.\\
-In order to display this context, we add wat we called the context bar, a video slider on which we add some layer representing the current annotation to do, and others close to it. A tooltip has also been added on each layer, giving as clue the a thumbnail of the annotation start and the name that may have been given.\\
-It is also possible to add seconds in front and after the shot to be able to look for already filled annotation with may be the same person speaking, which may help the user to complete his task.
+Though there are two main use cases, described in Section \ref{sec:shot} and \ref{sec:head}, components are mostly the same for both: the shot or the frame to annotate is displayed in a HTML5 video player and its metadata is shown under the player. The input of a set of annotations is supported by a textfield and a summary table.\\
 
-\subsubsection{Annotate head}
+Both use cases are part of an active learning loop. Each step outputs a selected list of annotations to be performed. Potentially multiple users connect to this list through the frontend, and process annotations in order. They can either validate an annotation of the current shot, or skip it if they feel unsure about it.
+
+
+% Pierrick: do we talk about both head and shot annotation, or only shot?
+\subsubsection{Annotate shot} \label{sec:shot}
+In the first use case, a user has to name the speaker in the shot. The player, restricted to the shot, allows to explore it at length.\\
+Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led us to propose a \emph{context bar}, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
+
+\subsubsection{Annotate head} \label{sec:head}
+% Pierrick: did not change anything here for now
 The second one corresponds to give the identity of a on screen appearing person. This time, we thought there was no need to scroll through the video, so only the correspong frame is dislayed to the user. As many person can be on screen, we had to help user to figure out which one have to be identified. That's why we add a layer on the frame, on which we drew a red square surronding the head of the right person.\\
+
 
 %Resp : LIST
 

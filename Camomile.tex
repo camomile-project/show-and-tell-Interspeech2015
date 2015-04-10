@@ -103,13 +103,21 @@ The second one corresponds to give the identity of a on screen appearing person.
 %Resp : LIST
 
       \subsection{Active learning backend}
-(présenter l'approche LIG - retraining and adaptation - et pointer sur le lien github précis - y passer plus de temps 
+%(présenter l'approche LIG - retraining and adaptation - et pointer sur le lien github précis - y passer plus de temps 
 
-Resp : Matheusz
+%Resp : Matheusz
+In order to make the annotations provided by the users more informative an active learning system 
+was developed. The approach can be described as an unsupervised active learning. In it, no biometric models are trained, but rather a clustering is preformed,
+which divides the data in a way that, ideally, each cluster corresponds to an individual person.  In this method a hierarchical clustering algorithm was used 
+following the  approach presented in \cite{poignant2012unsupervised}.  The clusters consist of tracks: speech (based on speaker diarization),  face (the result of face tracking) or both in the case of multimodal clusters. In the latter case, the distance between tracks from different modalities is based on the output of the multilayer perceptron \cite{bredin2012fusion}.
+
+At each step of the algorithm, the user is presented with a set of tracks for annotation. Afterwards, the clustering is refined when the new annotations are introduced.
+The label given to a particular track is propagated to the whole corresponding cluster. Next, a selection strategy is applied, which either tries to verify the correctness of the existing annotated clusters or label new ones.
+A more in-depth description of the method can be found in \cite{budnik2014automatic}.
 
       \subsection{Compatibility with other annotation tools}
 voir si on ajoute une partie comme ça ou pas?
-
+%Mateusz: Does this refer to the whole system? Or just particular components?
 Resp : LIMSI
 
 
@@ -117,15 +125,31 @@ Resp : LIMSI
   \section{Dry run evaluation}
       \subsection{Use case : multimodal speaker annotation}
      
-décrire la tâche et les participants à l'expe
+%décrire la tâche et les participants à l'expe
 
-Resp : Mateusz
+%Resp : Mateusz
+The task consists of annotating speakers in a video. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
+Each participant was presented with a video fragment corresponding to the time frame of a speech track and was asked to give the name of the person who is speaking at the moment.
+The user had also  access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid written or a spoken name.
+ 
       
       \subsection{Quantitative analysis}
-    
-stats présentés par Matheusz au meeting de Madrid
+ 
+ In the dry run 9 participants took part. The annotations were done simultaneously and lasted for around 1.5 hours pre user.
+In this run only the speaker annotation scenario was tested. The corpus consisted of 62 videos from the REPERE dataset \cite{giraudel2012repere}, which included TV debates, news programs and parliamentary broadcasts among others.  
 
-Resp : Mateusz
+During the run, a total of 716 speech tracks were annotated. This corresponds to 4875 seconds of speech (around 81 minutes) Additionally, 654 were marked as skipped. This is due to the automatic extraction of tracks where some do not contain speech, but music, external noises, etc. The total time of all the tracks that were seen by the annotators is 8934 seconds (148,9 minutes.)
+After removing the outliers (for example: due to people leaving the annotation system for an extended period of time while still logged in) the average annotation time is 20.0s and the median is equal to 10.8s.
+
+Additionally, because of the clustering present in the system, the annotations were propagated to the corresponding clusters. This produced a total number of 3504 labeled tracks (including the 716 annotated manually) with the total time equal to 7.81 hours. Also, the use of the multimodal clusters during the dry run enabled to get face annotation (1973 head annotation and 5.47 hours total time)
+without a single manual face annotation. The annotation obtained through propagation is not free of error, but can be re-annotated by the system, this time in a verification scenario, which is normally less time consuming than identification.
+
+
+ 
+    
+%stats présentés par Matheusz au meeting de Madrid
+
+%Resp : Mateusz
   
      \subsection{Qualitative analysis}
     

@@ -90,6 +90,8 @@ Both use cases are part of an active learning loop. Each step outputs a selected
 
 
 % Pierrick: do we talk about both head and shot annotation, or only shot?
+%Laurent: we will remove head annotation if not enough space - because this is 2 pages maximum
+
 \subsubsection{Annotate shot} \label{sec:shot}
 In the first use case, a user has to name the speaker in the shot. The player, restricted to the shot, allows to explore it at length.\\
 Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led us to propose a \emph{context bar}, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
@@ -176,7 +178,7 @@ resp : All
 décrire précisément ce qui sera présenté à Dresde en Sept 2015
 
   
-  \newpage
+%  \newpage
   \eightpt
   \bibliographystyle{IEEEtran}
   

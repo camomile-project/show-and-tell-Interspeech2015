@@ -93,12 +93,12 @@ Both use cases are part of an active learning loop. Each step outputs a selected
 %Laurent: we will remove head annotation if not enough space - because this is 2 pages maximum
 
 \subsubsection{Annotate shot} \label{sec:shot}
-In the first use case, a user has to name the speaker in the shot. The player, restricted to the shot, allows to explore it at length.\\
+In the first use case, a user has to name the speaker in the shot. The video player, restricted to the shot, allows to explore it at length.\\
 Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led us to propose a \emph{context bar}, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
 
 \subsubsection{Annotate head} \label{sec:head}
 % Pierrick: did not change anything here for now
-The second one corresponds to give the identity of a on screen appearing person. This time, we thought there was no need to scroll through the video, so only the correspong frame is dislayed to the user. As many person can be on screen, we had to help user to figure out which one have to be identified. That's why we add a layer on the frame, on which we drew a red square surronding the head of the right person.\\
+The second one corresponds to giving the identity of a person appearing on screen. In that case, there is no need to scroll through the video, so only the correspong frame is dislayed to the user. As several persons can appear on screen, it is necessary to help user to figure out which one has to be identified. For this, we add a layer on the frame, on which we draw a red square surronding the head of the person to name.\\
 
 
 %Resp : LIST
@@ -108,12 +108,11 @@ The second one corresponds to give the identity of a on screen appearing person.
 
 %Resp : Matheusz
 In order to make the annotations provided by the users more informative an active learning system 
-was developed. The approach can be described as an unsupervised active learning. In it, no biometric models are trained, but rather a clustering is preformed,
-which divides the data in a way that, ideally, each cluster corresponds to an individual person.  In this method a hierarchical clustering algorithm was used 
-following the  approach presented in \cite{poignant2012unsupervised}.  The clusters consist of tracks: speech (based on speaker diarization),  face (the result of face tracking) or both in the case of multimodal clusters. In the latter case, the distance between tracks from different modalities is based on the output of the multilayer perceptron \cite{bredin2012fusion}.
+was developed. The approach can be described as an unsupervised active learning since no biometric models are trained and only speaker clustering is performed (ideally, each cluster corresponds to an individual person).  In this method a hierarchical clustering algorithm was used 
+following the  approach presented in \cite{poignant2012unsupervised}.  The clusters consist of tracks: speech (based on speaker diarization),  face (the result of face tracking) or both in the case of multimodal clusters. In the latter case, the distance between tracks from different modalities is based on the output of a multilayer perceptron \cite{bredin2012fusion}.
 
 At each step of the algorithm, the user is presented with a set of tracks for annotation. Afterwards, the clustering is refined when the new annotations are introduced.
-The label given to a particular track is propagated to the whole corresponding cluster. Next, a selection strategy is applied, which either tries to verify the correctness of the existing annotated clusters or label new ones.
+The label given to a particular track is propagated to the whole corresponding cluster. Next, a selection strategy is applied, which either tries to verify the correctness of the existing annotated clusters or to label new ones.
 A more in-depth description of the method can be found in \cite{budnik2014automatic}.
 
       \subsection{Compatibility with other annotation tools}
@@ -129,21 +128,21 @@ Resp : LIMSI
 %décrire la tâche et les participants à l'expe
 
 %Resp : Mateusz
-The task consists of annotating speakers in a video. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
-Each participant was presented with a video fragment corresponding to the time frame of a speech track and was asked to give the name of the person who is speaking at the moment.
-The user had also  access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid written or a spoken name.
+We did a dry run annotation at a small scale. The task consisted of annotating speakers in a video. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
+Each participant was given a video fragment corresponding to the time frame of a speech track and was asked to name the person speaking at the moment.
+The user had also access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid text or by a spoken name.
  
       
       \subsection{Quantitative analysis}
  
- In the dry run 9 participants took part. The annotations were done simultaneously and lasted for around 1.5 hours pre user.
+9 persons were involved in the dry run. The annotations were done simultaneously (all the persons were performing the task at the same time) and lasted for around 1.5 hours per user.
 In this run only the speaker annotation scenario was tested. The corpus consisted of 62 videos from the REPERE dataset \cite{giraudel2012repere}, which included TV debates, news programs and parliamentary broadcasts among others.  
 
 During the run, a total of 716 speech tracks were annotated. This corresponds to 4875 seconds of speech (around 81 minutes) Additionally, 654 were marked as skipped. This is due to the automatic extraction of tracks where some do not contain speech, but music, external noises, etc. The total time of all the tracks that were seen by the annotators is 8934 seconds (148,9 minutes.)
 After removing the outliers (for example: due to people leaving the annotation system for an extended period of time while still logged in) the average annotation time is 20.0s and the median is equal to 10.8s.
 
 Additionally, because of the clustering present in the system, the annotations were propagated to the corresponding clusters. This produced a total number of 3504 labeled tracks (including the 716 annotated manually) with the total time equal to 7.81 hours. Also, the use of the multimodal clusters during the dry run enabled to get face annotation (1973 head annotation and 5.47 hours total time)
-without a single manual face annotation. The annotation obtained through propagation is not free of error, but can be re-annotated by the system, this time in a verification scenario, which is normally less time consuming than identification.
+without a single manual face annotation. The annotation obtained through propagation is not free of error, but can be re-annotated by the system, this time in a verification (active cleaning) scenario, which is normally less time consuming than identification.
 
 
  
@@ -158,7 +157,7 @@ without a single manual face annotation. The annotation obtained through propaga
 
 During the survey, participants had to fill a form to give some  feedback about the web front-end. This was done using Google forms \cite{url-google-forms}. The form is available on \cite{url-list-form}, and the results are visible at \cite{url-list-form-results}.
 
-If the users were mainly satisfied with the front-end, they pointed out some features that have to be improved. As examples, some tooltips or titles had to be added to improve the clarity of the UI, which have already been done since the survey. They also brought up that some component have to be revamped. The "context bar" is an instance of component on which we have to work. As a short term solution, we chose to add the thumbnail displaying a capture of the person concerned by the annotation, but this component will be totally rethought later.
+If the users were mainly satisfied with the front-end, they pointed out some features that have to be improved. As examples, some tooltips or titles had to be added to improve the clarity of the UI, which have already been done since the survey. They also brought up that some component have to be revamped. The "context bar" is an example of component we have to improve. As a short term solution, we chose to add the thumbnail displaying a capture of the person concerned by the annotation, but this component will be totally rethought later.
 %resp : LIST
 
 
@@ -169,13 +168,21 @@ If the users were mainly satisfied with the front-end, they pointed out some fea
     \subsection{Supporting data files}
 
 description vidéo démo soumise en même temps que le papier
-résumé code github pointé ?    
+(mettre une url sur la vidéo présentée à Madrid ?)
+
+All the code that support the camomile server, client and active learning is available on \cite{urlcamomile}.
+(à détailler par front-end, server, etc.)
 
 resp : All
 
     \subsection{Live demo scenario}
 
-décrire précisément ce qui sera présenté à Dresde en Sept 2015
+We will present a poster with all the last achievments obtained within the Camomile project. The annotation interface will be also demonstrated while a video will be played continuously during the \textit{show and tell} session.
+
+        \vspace{-0.3cm}
+ \section{Acknowledgements}
+  
+    This work was done in the framework of the Camomile project, funded by the French National Research Agency ( \textit{Agence Nationale de la Recherche - ANR}) in the CHIST-ERA international program.
 
   
 %  \newpage

@@ -47,17 +47,18 @@ This paper presents
 
   \section{Introduction}
       \subsection{Context - Camomile project}
+      % Mateusz: First as in "the first working version" or "first collaborative framework for such task"?
 One of the objectives of the Camomile project \textit{https://camomile.limsi.fr} is to develop a first prototype of a collaborative annotation framework for 3M (multimodal, multimedia, multilingual) data, in which the manual annotation is done remotely on many sites, while the final annotation is localized on the main site. 
 
 
  \subsection{Demo Content}
-The demo shows out shot annotation interface for person identification in TV shows. The tool is supported by a web annotation front end, a server to centralize annotations as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation for an small-scale annotation campaign are also presented in section 3.
+The demo presents the shot annotation interface for person identification in TV shows. The tool is supported by a web annotation front end, a server to centralize annotations as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation for a small-scale annotation campaign are also presented in section 3.
 %As for the document structure, I would go the other way: first talk about the use case, and then about the interactive tools to support it. Else we have to talk about a problem that has not been already introduced.
 
 
       \section{Collaborative annotation framework}
 
-The ultimate purpose of the platform is to provide on demand overviews and details regarding the 3M data, and the associated automatic and manual annotations. In this paper we focus on manual annotations from multiple users. The proposed collaborative annotation framework follows a client/server architecture (see figure~\ref{fig:overview}). 
+The ultimate purpose of the platform is to provide on demand overviews and details regarding the 3M data, and the associated automatic and manual annotations. In this paper, the focus is on manual annotations from multiple users. The proposed collaborative annotation framework follows a client/server architecture (see figure~\ref{fig:overview}). 
 
 \begin{figure}[h]
  	\includegraphics[width=0.45\textwidth]{overview.png}
@@ -70,7 +71,7 @@ The frontend and backend parts can be seen as a client of the server part. The i
 
       \subsection{Camomile server}
 
-The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on node.js with express framework and mongodb as data storage solutions. The latest version of our server is available at \cite{urlserver}. 
+The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on node.js with express framework and mongodb as data storage solutions. The latest version of the server is available at \cite{urlserver}. 
 
 
       \subsection{Web annotation front-end}
@@ -86,7 +87,7 @@ The server component provides access and basic CRUD operations (create, update, 
 
 % Pierrick: during my trials for the demo video, I found that the annotation list was more annoying than anything else - I has to scroll everytime to do (next), whereas fitting in screen height would make things easier. Also, are multi-annotations to be supported?
 
-An overview of our visual tool is shown in Figure~\ref{fig:frontend}. It heavily uses the display features provided by HTML5 and D3.js \cite{d3js}. The angular.js framework \cite{angularjs} provides an efficient MVC framework to easily coordinate multiple views. The latest version of our tool is available at \cite{urlfrontend}.
+An overview of the visual tool is shown in Figure~\ref{fig:frontend}. It heavily uses the display features provided by HTML5 and D3.js \cite{d3js}. The angular.js framework \cite{angularjs} provides an efficient MVC framework to easily coordinate multiple views. The latest version of the tool is available at \cite{urlfrontend}.
 
 
 
@@ -100,11 +101,11 @@ Both use cases are part of an active learning loop. Each step outputs a selected
 
 \subsubsection{Annotate shot} \label{sec:shot}
 In the first use case, a user has to name the speaker in the shot. The video player, restricted to the shot, allows to explore it at length.\\
-Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led us to propose a \emph{context bar}, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
+Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led to a \emph{context bar} being proposed, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
 
 \subsubsection{Annotate head} \label{sec:head}
 % Pierrick: did not change anything here for now
-The second one corresponds to giving the identity of a person appearing on screen. In that case, there is no need to scroll through the video, so only the correspong frame is dislayed to the user. As several persons can appear on screen, it is necessary to help user to figure out which one has to be identified. For this, we add a layer on the frame, on which we draw a red square surronding the head of the person to name.\\
+The second one corresponds to giving the identity of a person appearing on screen. In that case, there is no need to scroll through the video, so only the correspong frame is dislayed to the user. As several persons can appear on screen, it is necessary to help users to figure out which one has to be identified. For this, a layer on the frame was added, on which a red square surronding the head of the person to name was drawn.\\
 
 
 %Resp : LIST
@@ -134,7 +135,7 @@ Resp : LIMSI
 %décrire la tâche et les participants à l'expe
 
 %Resp : Mateusz
-We did a dry run annotation at a small scale. The task consisted of annotating speakers in a video. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
+A dry run annotation on a small scale was done to evaluate the efficiency of the whole system. The task consisted of annotating speakers in videos. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
 Each participant was given a video fragment corresponding to the time frame of a speech track and was asked to name the person speaking at the moment.
 The user had also access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid text or by a spoken name.
  
@@ -183,7 +184,7 @@ resp : All
 
     \subsection{Live demo scenario}
 
-A poster will be presented with all the latest achievments obtained during the Camomile project. The annotation interface will be also demonstrated while videos will be played continuously during the \textit{show and tell} session.
+A poster will be presented with all the latest achievments obtained during the Camomile project. The annotation interface will be also demonstrated while videos will be played continuously during the \textit{show and tell} session. % A hands-on demo of the whole annotation system will be made available during the \textit{show and tell} session. ?
 
         \vspace{-0.3cm}
  \section{Acknowledgements}

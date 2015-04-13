@@ -6,3 +6,6 @@
 *.toc
 *.out
 *.blg
+.~lock.overview.odg#
+
+Camomile.dvi

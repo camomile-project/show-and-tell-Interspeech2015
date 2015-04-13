@@ -47,26 +47,32 @@ This paper presents
 
   \section{Introduction}
       \subsection{Context - Camomile project}
-One of the objectives of the Camomile project\textit{https://camomile.limsi.fr} is to develop a first prototype of a collaborative annotation framework for 3M (multimodal, multimedia, multilingual) data, in which the manual annotation is done remotely on many sites, while the final annotation is localized on the main site. 
+One of the objectives of the Camomile project \textit{https://camomile.limsi.fr} is to develop a first prototype of a collaborative annotation framework for 3M (multimodal, multimedia, multilingual) data, in which the manual annotation is done remotely on many sites, while the final annotation is localized on the main site. 
 
 
  \subsection{Demo Content}
-The demo shows out shot annotation interface for person identification in TV shows. The tool is supported by a collaborative annotation framework, a web annotation front end as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation for an small-scale annotation campaign are also presented in section 3.
+The demo shows out shot annotation interface for person identification in TV shows. The tool is supported by a web annotation front end, a server to centralize annotations as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation for an small-scale annotation campaign are also presented in section 3.
 %As for the document structure, I would go the other way: first talk about the use case, and then about the interactive tools to support it. Else we have to talk about a problem that has not been already introduced.
 
 
-      \section{Collaborative annotation using Camomile tools}
+      \section{Collaborative annotation framework}
 
-mettre / présenter une vue d'ensemble (schéma) 
+The ultimate purpose of the platform is to provide on demand overviews and details regarding the 3M data, and the associated automatic and manual annotations. In this paper we focus on manual annotations from multiple users. The proposed collaborative annotation framework follows a client/server architecture (see figure~\ref{fig:overview}). 
 
-Reprendre cette présentation en plus détaillé dans une page github.io 
+\begin{figure}[h]
+ 	\includegraphics[width=0.45\textwidth]{overview.png}
+	\caption{Overview of the Collaborative annotation using Camomile tools}
+	\label{fig:overview}
+\end{figure}
+
+The frontend and backend parts can be seen as a client of the server part. The involved server-side technologies rely solely on exchanges via the HTTP protocol, facilitating the design of interoperable software components. The server focuses essentially on data and authentication management tasks, leaving the application logic to the client side. More details on the framework can be found at \cite{urlframework}
 
 
-      \subsection{Collaborative annotation framework}
-(présenter le framework et pointer sur le lien github précis - passer rapidement - reprendre anciens articles)
+      \subsection{Camomile server}
 
-Resp : Johann
-  
+The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on node.js with express framework and mongodb as data storage solutions. The latest version of our server is available at \cite{urlserver}. 
+
+
       \subsection{Web annotation front-end}
 %(présenter le front-end web et pointer sur le lien github précis - y passer plus de temps 
 

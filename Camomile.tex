@@ -52,7 +52,7 @@ One of the objectives of the Camomile project \footnote{https://camomile.limsi.f
 
         \vspace{-0.2cm}
  \subsection{Demo Content}
-The demo presents our shot annotation interface for person identification in TV shows. The tool is supported by a web annotation front end, a server to centralize annotations as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation (small-scale annotation campaign) is also presented in section 3.
+The demo presents our annotation interface for person identification in TV shows. Specifically, tracks, i.e. spatio-temporal segments, are annotated with names of people they feature. The tool is supported by a web annotation front end, a server to centralize annotations as well as an active learning backend that are all described in section 2 of this paper. A dry run evaluation (small-scale annotation campaign) is also presented in section 3.
 %As for the document structure, I would go the other way: first talk about the use case, and then about the interactive tools to support it. Else we have to talk about a problem that has not been already introduced.
 
 
@@ -67,12 +67,12 @@ In this paper, the focus is on manual annotations from multiple users. The propo
 	\label{fig:overview}
 \end{figure}
 
-The frontend and backend parts can be seen as a client of the server part. The involved server-side technologies rely solely on exchanges via the HTTP protocol, facilitating the design of interoperable software components. The server focuses essentially on data and authentication management tasks, leaving the application logic to the client side. More details on the framework can be found at \cite{urlframework}.
+The frontend and backend parts are coordinated through the server. The data exchanges occur solely via the HTTP protocol, facilitating the design of interoperable software components. The server focuses essentially on data and authentication management tasks, leaving the application logic to the both the client and backend parts. More details on the framework can be found at \cite{urlframework}.
 
 
       \subsection{Camomile server}
 
-The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on \textit{node.js} with \textit{express framework} and \textit{mongodb} as data storage solutions. The latest version of the server is available at \cite{urlserver}. 
+The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on \textit{node.js} with \textit{express framework} and \textit{mongodb} as data storage solutions. The latest version of the server is available at \cite{urlgithub}. 
 
         \vspace{-0.3cm}
       \subsection{Web annotation front-end}
@@ -83,18 +83,18 @@ The server component provides access and basic CRUD operations (create, update, 
 \begin{figure}[h]
 	\centering
  	\includegraphics[width=0.4\textwidth]{camomile_ui-bis.png}
-	\caption{Overview of the web front-end UI. 1) Video player displaying the shot to annotate and the synchronized \emph{context bar}. 2) The \emph{context bar} configuration and the metadata field. The latter displays the video title, and reveals additional details when activated. 3) The textfield to type the annotation. Multiple annotations are supported, and summarized in a table.}
+	\caption{Overview of the web front-end UI. 1) Video player displaying the track to annotate and the synchronized \emph{context bar}. 2) The \emph{context bar} configuration and the metadata field. The latter displays the video title, and reveals additional details when activated. 3) The textfield to type the annotation. Multiple annotations are supported, and summarized in a table.}
 	\label{fig:frontend}
 
 \end{figure}
 
-% Pierrick: during my trials for the demo video, I found that the annotation list was more annoying than anything else - I has to scroll everytime to do (next), whereas fitting in screen height would make things easier. Also, are multi-annotations to be supported?
+% TODO : enlarge numbers wrt total image size
 
-An overview of the visual tool is shown in Figure~\ref{fig:frontend}. It uses display features provided by HTML5 and D3.js \cite{d3js}. The \textit{angular.js} framework \cite{angularjs} provides an efficient MVC framework to easily coordinate multiple views. The latest version of the tool is available at \cite{urlfrontend}.
+An overview of the visual tool is shown in Figure~\ref{fig:frontend}. It uses display features provided by HTML5 and D3.js \cite{d3js}. The \textit{angular.js} framework \cite{angularjs} provides an efficient MVC framework to easily coordinate multiple views. The latest version of the tool is available at \cite{urlgithub}.
 
 
 
-Though there are two main use cases (see \ref{sec:shot} and \ref{sec:head}), components are mostly the same for both: the shot or the frame to annotate is displayed in a HTML5 video player and its metadata is shown under the player. The input of a set of annotations is supported by a textfield and a summary table. 
+Though there are two main use cases (see \ref{sec:shot} and \ref{sec:head}), components are mostly the same for both: the track or the frame to annotate is displayed in a HTML5 video player and its metadata is shown under the player. The input of multiple annotations is supported by a textfield and a summary table. 
 
 %Both use cases are part of an active learning loop. Each step outputs a selected list of annotations to be performed. Potentially multiple users connect to this list through the frontend, and process annotations in order. They can either validate an annotation of the current shot, or skip it if they feel unsure about it.
 
@@ -102,31 +102,30 @@ Though there are two main use cases (see \ref{sec:shot} and \ref{sec:head}), com
 % Pierrick: do we talk about both head and shot annotation, or only shot?
 %Laurent: we will remove head annotation if not enough space - because this is 2 pages maximum
 
-\subsubsection{Annotate shot} \label{sec:shot}
+\subsubsection{Annotating speech} \label{sec:shot}
         \vspace{-0.2cm}
-In the first use case, a user has to name the speaker in the shot. The video player, restricted to the shot, allows to explore it at length.\\
-Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current shot might reveal such annotations. This obervation led to a \emph{context bar} being proposed, which provides the usual features of a seek bar, while revealing annotations performed in previous steps as overlay. A time span can be parametrized around the current shot, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
+In the first use case, a user has to name the speaker in the track. The video player, restricted to the track, allows to explore it at will.\\
+Owing to the iterative nature of the active learning algorithm, the current speaker might have already been annotated elsewhere in the video. Seeking beyond the current track might reveal such annotations. This obervation led to a \emph{context bar} being proposed, which provides the usual features of a seek bar, while revealing annotations performed in previous steps of the active learning as overlay. A time span can be parametrized around the current track, highlighted in red (see Figure \ref{fig:frontend}). Hovering over contextual annotations displays a tooltip containing a video thumbnail and the associated annotation.\\
 
         \vspace{-0.5cm}
-\subsubsection{Annotate head} \label{sec:head}
+\subsubsection{Annotating faces} \label{sec:head}
         \vspace{-0.2cm}
-% Pierrick: did not change anything here for now
-The second one corresponds to giving the identity of a person appearing on screen. In that case, there is no need to scroll through the video, so only the correspong frame is dislayed to the user. As several persons can appear on screen, it is necessary to help users to figure out which one has to be identified. For this, a layer on the frame was added, on which a red square surronding the head of the person to name was drawn.\\
+Annotating people appearing in tracks has also been considered. To facilitate the overlay of bounding boxes on faces to annotate, the display is restricted to a single frame. Doing so also lets the active learning backend require to annotate only a specific person in the frame.
 
 
 %Resp : LIST
-        \vspace{-0.5cm}
+%        \vspace{-0.5cm}
       \subsection{Active learning backend}
-        \vspace{-0.1cm}
+%        \vspace{-0.1cm}
 %(présenter l'approche LIG - retraining and adaptation - et pointer sur le lien github précis - y passer plus de temps 
 
 %Resp : Matheusz
 In order to make the annotations provided by the users more relevant, an active learning system 
-was developed. The approach can be described as an unsupervised active learning since no biometric models are trained and only speaker clustering is performed (ideally, each cluster corresponds to an individual person).  In this method a hierarchical clustering algorithm was used 
+was developed. The approach can be described unsupervised since no biometric models are trained and only speaker clustering is performed (ideally, each cluster corresponds to an individual person).  In this method a hierarchical clustering algorithm was used 
 following the  approach presented in \cite{poignant2012unsupervised}.  The clusters consist of tracks: speech (based on speaker diarization),  face (the result of face tracking) or both in the case of multimodal clusters. In the latter case, the distance between tracks from different modalities is based on the output of a multilayer perceptron.
 
 At each step of the algorithm, the user is presented with a set of tracks for annotation. Then, the clustering is refined when new annotations are introduced.
-The label given to a particular track is propagated to the whole corresponding cluster. Next, a selection strategy is applied, which tries to verify the correctness of the annotated clusters or to label new ones.
+The label given to a particular track is propagated to the whole corresponding cluster. Next, a selection strategy is applied, which tries to verify the correctness of the annotated clusters or to label new ones, and feeds a queue of annotations to be processed by annotators using the interface in Figure \ref{fig:frontend}. Already labelled tracks are provided to the queue to enable the context bar (see section \ref{sec:shot}). 
 More in-depth description of the method can be found in \cite{budnik2014automatic}.
 
 %      \subsection{Compatibility with other annotation tools}
@@ -142,14 +141,14 @@ More in-depth description of the method can be found in \cite{budnik2014automati
 %décrire la tâche et les participants à l'expe
 
 %Resp : Mateusz
-A dry run annotation was done to evaluate the efficiency of the whole system. The task consisted of annotating speakers in videos. The speech tracks were extracted automatically following the approach presented in \cite{barras2006multistage}.
+A dry run annotation was done to evaluate the efficiency of the whole system. The task consisted of annotating speech tracks extracted automatically following the approach presented in \cite{barras2006multistage}.
 Each participant was given a video fragment corresponding to the time frame of a speech track and was asked to name the person speaking at the moment.
-The user had also access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid text or by a spoken name.
+Beyond tuning the context bar, the user could also access to the whole video. Due to the nature of the videos (TV news broadcasts), most people were presented either by an overlaid text or by a spoken name.
  
       
       \subsection{Quantitative analysis}
  
-9 persons were involved in the dry run. The annotations were done simultaneously and lasted for around 1.5 hours per user.
+9 users were involved in the dry run. The annotations were done simultaneously and lasted for around 1.5 hours per user.
 In this run only the speaker annotation scenario was tested. The corpus consisted of 62 videos from the REPERE dataset \cite{giraudel2012repere}, which included TV debates, news programs and parliamentary broadcasts among others.  During the run, a total of 716 speech tracks (81mn) were annotated. Additionally, 654 tracks (68mn) were marked as skipped (tracks which do not contain speech, but music, external noises, etc.). The median annotation time is equal to 10.8s. Additionally, because of the clustering present in the system, the annotations were propagated to the corresponding clusters. This produced a total number of 3504 labeled tracks (including the 716 annotated manually) with the total time equal to 7.81h. As a \textit{by-product}, the use of the multimodal clusters during the dry run enabled to get face annotation (1973 head annotations - 5.47h total). 
 
 %After removing the outliers (for example: due to people leaving the annotation system for an extended period of time while still logged in) the average annotation time is 20.0s and the median is equal to 10.8s.
@@ -170,7 +169,9 @@ In this run only the speaker annotation scenario was tested. The corpus consiste
 
 %Analyse des resultats du Survey
 
-During the survey, participants had to fill a form to give some feedback about the web front-end. The form is available on \cite{url-list-form}, and the results are visible at \cite{url-list-form-results}. If the users were mainly satisfied with the front-end, they pointed out some features that have to be improved. As examples, some tooltips or titles had to be added to improve the clarity of the UI, which have already been done since the survey. They also brought up that some component have to be revamped. The "context bar" is an example of component we have to improve. As a short term solution, we chose to add the thumbnail displaying a capture of the person concerned by the annotation.
+After the dry run participants had to fill a feedback questionnaire about the web front-end. 
+%The form is available on \cite{url-list-form}, and the results are visible at \cite{url-list-form-results}. 
+While the users were mostly satisfied with the front-end, they pointed out some bugs and lines for improvement. For example, the need for additional tooltips and titles was expressed. Modifications following these suggestions were applied since then. Though the idea was deemed as interesting, it has not been judged as sufficiently self-explanatory. On the short term, we added a video thumbnail when hovering over the associated annotation.
 
 %but this component will be totally rethought later.
 
@@ -186,7 +187,7 @@ During the survey, participants had to fill a form to give some feedback about t
           \vspace{-0.1cm}
 %    \subsection{Supporting data files}
 
-A video presenting the annotation was recently published on Youtube \footnote{https://www.youtube.com/watch?v=BlerDVc--Fw}. All the code that support the camomile server, client and active learning is available on the \textit{camomile github}.
+A video presenting the annotation was recently published on Youtube \footnote{https://www.youtube.com/watch?v=BlerDVc--Fw}. All the code that supports the camomile server, client and active learning is available on the \textit{camomile github} \cite{urlgithub}.
 
 
 %    \subsection{Live demo scenario}
@@ -196,7 +197,7 @@ A poster will be presented with all the latest achievments obtained during the C
         \vspace{-0.3cm}
  \section{Acknowledgements}
   
-    This work is done within \textit{Camomile} project funded by the French National Research Agency ( \textit{Agence Nationale de la Recherche - ANR}) in the CHIST-ERA international program.
+    This work is done within \textit{Camomile} project funded by the French National Research Agency ( \textit{Agence Nationale de la Recherche - ANR}) and the Luxembourg National Research Fund ( \textit{Fonds National de la Recherche - ANR}) in the CHIST-ERA international program.
 
   
 %  \newpage

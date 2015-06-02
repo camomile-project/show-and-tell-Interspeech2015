@@ -48,7 +48,7 @@ This paper presents a collaborative annotation framework for person identificati
   \section{Introduction}
       \subsection{Context - Camomile project}
       % Mateusz: First as in "the first working version" or "first collaborative framework for such task"?
-One of the objectives of the Camomile project \footnote{https://camomile.limsi.fr} is to develop a first prototype of a collaborative annotation framework for 3M (multimodal, multimedia, multilingual) data, in which the manual annotation is done remotely on many sites, while the final annotation is localized on the main site. 
+One of the objectives of the Camomile project \footnote{https://camomile.limsi.fr} is to develop a first prototype of a collaborative annotation framework for 3M (Multimodal, Multimedia, Multilingual) data, in which the manual annotation is done remotely on many sites, while the final annotation is localized on the main site. 
 
         \vspace{-0.2cm}
  \subsection{Demo Content}
@@ -72,7 +72,7 @@ The frontend and backend parts are coordinated through the server. The data exch
 
       \subsection{Camomile server}
 
-The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on \textit{node.js} with \textit{express framework} and \textit{mongodb} as data storage solutions. The latest version of the server is available at \cite{urlgithub}. 
+The server component provides access and basic CRUD operations (create, update, delete) for the resources, which can be any pieces of 3M data (corpus, media, layers and annotations). The web server is built on \textit{node.js} with the \textit{express framework} and \textit{mongodb} as data storage solutions. The latest version of the server is available at \cite{urlgithub}. 
 
         \vspace{-0.3cm}
       \subsection{Web annotation front-end}
@@ -149,7 +149,7 @@ Beyond tuning the context bar, the user could also access to the whole video. Du
       \subsection{Quantitative analysis}
  
 9 users were involved in the dry run. The annotations were done simultaneously and lasted for around 1.5 hours per user.
-In this run only the speaker annotation scenario was tested. The corpus consisted of 62 videos from the REPERE dataset \cite{giraudel2012repere}, which included TV debates, news programs and parliamentary broadcasts among others.  During the run, a total of 716 speech tracks (81mn) were annotated. Additionally, 654 tracks (68mn) were marked as skipped (tracks which do not contain speech, but music, external noises, etc.). The median annotation time is equal to 10.8s. Additionally, because of the clustering present in the system, the annotations were propagated to the corresponding clusters. This produced a total number of 3504 labeled tracks (including the 716 annotated manually) with the total time equal to 7.81h. As a \textit{by-product}, the use of the multimodal clusters during the dry run enabled to get face annotation (1973 head annotations - 5.47h total). 
+In this run only the speaker annotation scenario was tested. The corpus consisted of 62 videos from the REPERE dataset \cite{giraudel2012repere}, which included TV debates, news programs and parliamentary broadcasts among others.  During the run, a total of 716 speech tracks (81mn) were annotated. Additionally, 654 tracks (68mn) were marked as skipped (tracks which do not contain speech, but music, external noises, etc.). The median annotation time is equal to 10.8s. Additionally, because of the clustering present in the system, the annotations were propagated to the corresponding clusters. This produced a total number of 3504 labeled tracks (including the 716 annotated manually) with the total time equal to 7.81h. As a \textit{by-product}, the use of the multimodal clusters during the dry run enabled to get face annotation (1973 head annotations, for a total duration of 5.47h). 
 
 %After removing the outliers (for example: due to people leaving the annotation system for an extended period of time while still logged in) the average annotation time is 20.0s and the median is equal to 10.8s.
 
@@ -171,7 +171,7 @@ In this run only the speaker annotation scenario was tested. The corpus consiste
 
 After the dry run participants had to fill a feedback questionnaire about the web front-end. 
 %The form is available on \cite{url-list-form}, and the results are visible at \cite{url-list-form-results}. 
-While the users were mostly satisfied with the front-end, they pointed out some bugs and lines for improvement. For example, the need for additional tooltips and titles was expressed. Modifications following these suggestions were applied since then. Though the idea was deemed as interesting, it has not been judged as sufficiently self-explanatory. On the short term, we added a video thumbnail when hovering over the associated annotation.
+While the users were mostly satisfied with the front-end, they pointed out some bugs and lines for improvement. For example, the need for additional tooltips and titles was expressed. Modifications following these suggestions were applied since then. Though the proposed context bar was deemed as an interesting idea, it has not been judged as sufficiently self-explanatory. On the short term, we added a video thumbnail when hovering over the associated annotation, but the chosen visual mapping and layout should be refactored. 
 
 %but this component will be totally rethought later.
 
@@ -183,11 +183,11 @@ While the users were mostly satisfied with the front-end, they pointed out some 
 
 
         \vspace{-0.3cm}
-  \section{Supported data files and demo scenario}
+  \section{Supporting content and demo scenario}
           \vspace{-0.1cm}
 %    \subsection{Supporting data files}
 
-A video presenting the annotation was recently published on Youtube \footnote{https://www.youtube.com/watch?v=BlerDVc--Fw}. All the code that supports the camomile server, client and active learning is available on the \textit{camomile github} \cite{urlgithub}.
+A video presenting the annotation process was recently published on Youtube \footnote{https://www.youtube.com/watch?v=BlerDVc--Fw}. All the code that supports the camomile server, client and active learning is available on the \textit{camomile github} \cite{urlgithub}.
 
 
 %    \subsection{Live demo scenario}
@@ -197,7 +197,7 @@ A poster will be presented with all the latest achievments obtained during the C
         \vspace{-0.3cm}
  \section{Acknowledgements}
   
-    This work is done within \textit{Camomile} project funded by the French National Research Agency ( \textit{Agence Nationale de la Recherche - ANR}) and the Luxembourg National Research Fund ( \textit{Fonds National de la Recherche - ANR}) in the CHIST-ERA international program.
+This work is done within \textit{Camomile} project funded by the French National Research Agency (\textit{Agence Nationale de la Recherche - ANR}) and the Luxembourgish National Research Fund (\textit{Fonds National de la Recherche - FNR}) in the CHIST-ERA international program.
 
   
 %  \newpage
